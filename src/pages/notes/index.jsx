@@ -1,14 +1,24 @@
 import React from "react";
 import Link from "next/link";
 
-const Notes = () => (
-  <div>
-    <h1>Notes Page</h1>
+const Notes = () => {
+  let notesList = new Array(15)
+    .fill(1)
+    .map((e, i) => ({ id: i, title: `Note: ${i}` }));
 
-    <Link href="/notes/[id]" as={`/notes/1`}>
-      <a>Go To Notes 1</a>
-    </Link>
-  </div>
-);
+  return (
+    <div>
+      <h1>Notes</h1>
+
+      {notesList.map((note) => (
+        <Link key={note.id} href="/notes/[id]" as={`/notes/${note.id}`}>
+          <a>
+            <strong>{note.title}</strong>
+          </a>
+        </Link>
+      ))}
+    </div>
+  );
+};
 
 export default Notes;
